@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v4
 
       - name: Configurar Java 17
@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Permitir gradlew
+      - name: Dar permissão ao Gradle
         run: chmod +x gradlew
 
       - name: Rodar testes

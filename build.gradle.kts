@@ -37,4 +37,9 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+
+    // Ignorar os testes do pacote selenium no CI
+    if (System.getenv("CI") == "true") {
+        exclude("com/tp4refatorado/selenium/**")
+    }
 }

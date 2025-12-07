@@ -1,0 +1,28 @@
+name: Testes Automatizados
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/**"
+      - "!README.md"
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Permitir gradlew
+        run: chmod +x gradlew
+
+      - name: Rodar testes
+        run: ./gradlew test

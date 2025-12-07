@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Roupas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f2f2f2; }
+        a.button { background:#4CAF50; color:white; padding:6px 10px; text-decoration:none; border-radius:4px; }
+        a.danger { color: #c00; text-decoration: none; }
+    </style>
+</head>
+<body>
+<h1>Lista de Roupas</h1>
+
+<p>
+    <a th:href="@{/roupas/novo}" class="button">Nova Roupa</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tamanho</th>
+        <th>Preço</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="roupa : ${roupas}">
+        <td th:text="${roupa.id}">1</td>
+        <td th:text="${roupa.nome}">Nome</td>
+        <td th:text="${roupa.tamanho}">M</td>
+        <td th:text="${#numbers.formatDecimal(roupa.preco, 1, 'COMMA', 2, 'POINT')}">0.00</td>
+        <td>
+            <a th:href="@{/roupas/editar/{id}(id=${roupa.id})}">Editar</a>
+            &nbsp;|&nbsp;
+            <a th:href="@{/roupas/deletar/{id}(id=${roupa.id})}" class="danger"
+               onclick="return confirm('Confirma exclusão?');">Deletar</a>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(roupas)}">
+        <td colspan="5">Nenhuma roupa cadastrada.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
